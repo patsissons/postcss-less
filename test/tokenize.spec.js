@@ -137,6 +137,22 @@ describe('#tokenize()', () => {
             ['}', '}', 1, 40]
         ]);
     });
+    
+    it('tokenizes nested extend', () => {
+        testTokens('.a {\n      &:extend(.bucket tr);\n}', [
+            ['word', '.a', 1, 1, 1, 2],
+            ['space', ' '],
+            ['{', '{', 1, 4],
+            ['space', '\n      '],
+            ['word', '&', 2, 7, 2, 7],
+            [':', ':', 2, 8],
+            ['word', 'extend', 2, 9, 2, 14],
+            ['brackets', '(.bucket tr)', 2, 15, 2, 26],
+            [';', ';', 2, 27],
+            ['space', '\n'],
+            ['}', '}', 3, 1]
+        ]);
+    });
 
     describe('Comments', () => {
         it('tokenizes inline comments', () => {
